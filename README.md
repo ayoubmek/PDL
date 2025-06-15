@@ -28,9 +28,25 @@ MoneyWise vous aide à suivre, organiser et analyser vos dépenses de manière *
 ---
 
 ## 📸 Aperçu
+ 
 
-> (Ajoutez ici des captures d’écran de votre dashboard, des graphiques de dépenses, formulaire de saisie, etc.)
+Voici quelques captures d’écran illustrant les principales fonctionnalités de l’application **MoneyWise** :
 
+### 🔐 Authentification avec JWT
+Connexion sécurisée via token JWT pour accéder à la plateforme.
+![Login](./screenshots/login.png)
+
+---
+
+### 🖥️ Tableau de bord interactif
+Vue globale des dépenses, catégories, et statistiques clés.
+![Dashboard](./screenshots/dashboard1.png)
+
+---
+
+### 📋 Liste des dépenses
+Consultation, filtrage, et gestion des dépenses enregistrées.
+![Liste des dépenses](./screenshots/liste-depense.png)
 ---
 
 ## 🚀 Lancer le projet localement
@@ -68,22 +84,4 @@ npm install -g @angular/cli
 
 
 
-## 📸 Aperçu
 
-Voici quelques captures d’écran illustrant les principales fonctionnalités de l’application **MoneyWise** :
-
-### 🔐 Authentification avec JWT
-Connexion sécurisée via token JWT pour accéder à la plateforme.
-![Login](./screenshots/login.png)
-
----
-
-### 🖥️ Tableau de bord interactif
-Vue globale des dépenses, catégories, et statistiques clés.
-![Dashboard](./screenshots/dashboard1.png)
-
----
-
-### 📋 Liste des dépenses
-Consultation, filtrage, et gestion des dépenses enregistrées.
-![Liste des dépenses](./screenshots/liste-depense.png)

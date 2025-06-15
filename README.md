@@ -10,7 +10,7 @@ Connexion sécurisée via token JWT pour accéder à la plateforme.
 
 ### 🖥️ Tableau de bord interactif
 Vue globale des dépenses, catégories, et statistiques clés.
-![Dashboard](./screenshots/dashboard.png)
+![Dashboard](./screenshots/dashboard1.png)
 
 ---
 

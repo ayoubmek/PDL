@@ -1,17 +1,21 @@
 package com.pdl.pdl.entity;
 
 import jakarta.persistence.*;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
 @Table(name = "depense")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Depense {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false)
     private String libelle;
 
@@ -22,14 +26,12 @@ public class Depense {
     @Column(name = "date_depense", nullable = false)
     private Date dateDepense;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categorie_id")
-    @JsonBackReference("categorie-reference")
     private Categorie categorie;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "utilisateur_id", nullable = false)
-    @JsonBackReference("utilisateur-reference")
     private AppUser utilisateur;
 
     @Column(name = "justificatif_path")
@@ -39,19 +41,8 @@ public class Depense {
     @Column(nullable = false)
     private StatutDepense statut = StatutDepense.SOUMIS;
 
-    public Depense() {
-    }
+    // Getters and setters...
 
-    public Depense(String libelle, BigDecimal montant, Date dateDepense, Categorie categorie, AppUser utilisateur, String justificatifPath) {
-        this.libelle = libelle;
-        this.montant = montant;
-        this.dateDepense = dateDepense;
-        this.categorie = categorie;
-        this.utilisateur = utilisateur;
-        this.justificatifPath = justificatifPath;
-    }
-
-    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -69,6 +60,7 @@ public class Depense {
 
     public AppUser getUtilisateur() { return utilisateur; }
     public void setUtilisateur(AppUser utilisateur) { this.utilisateur = utilisateur; }
+
     public String getJustificatifPath() { return justificatifPath; }
     public void setJustificatifPath(String justificatifPath) { this.justificatifPath = justificatifPath; }
 

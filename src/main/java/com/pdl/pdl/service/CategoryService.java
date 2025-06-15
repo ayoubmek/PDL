@@ -14,40 +14,44 @@ import java.util.Optional;
 
 @Service
 public class CategoryService {
-  private CategoryRepository CategoryRepository;
-  private DepenseRepository depenseRepository;
-  private HistoryRepository historyRepository;
 
+  private final CategoryRepository categoryRepository;
+  private final DepenseRepository depenseRepository;
+  private final HistoryRepository historyRepository;
+
+  public CategoryService(CategoryRepository categoryRepository,
+                         DepenseRepository depenseRepository,
+                         HistoryRepository historyRepository) {
+    this.categoryRepository = categoryRepository;
+    this.depenseRepository = depenseRepository;
+    this.historyRepository = historyRepository;
+  }
 
   public List<Categorie> getAllCategories() {
-    return CategoryRepository.findAll();
+    return categoryRepository.findAll();
   }
 
   public Optional<Categorie> getCategorieById(Long id) {
-    return CategoryRepository.findById(id);
+    return categoryRepository.findById(id);
   }
 
-  public Categorie saveCategorie(Categorie Categorie) {
-    // Check if this is a new Categorie
-    boolean isNew = Categorie.getId() == null;
+  public Categorie saveCategorie(Categorie categorie) {
+    boolean isNew = categorie.getId() == null;
 
-    // Save the Categorie to the repository
-    Categorie savedCategorie = CategoryRepository.save(Categorie);
+    Categorie savedCategorie = categoryRepository.save(categorie);
 
     History history = new History();
     history.setAction(isNew ? "Create Categorie" : "Update Categorie");
     history.setDetails((isNew ? "Created" : "Updated") + " Categorie with ID: " + savedCategorie.getId());
     history.setActionDate(LocalDate.now());
 
-    // Save the history entry
     historyRepository.save(history);
-
     return savedCategorie;
   }
 
   public void deleteCategorie(Long id) {
-    CategoryRepository.findById(id).ifPresent(Categorie -> {
-      CategoryRepository.delete(Categorie);
+    categoryRepository.findById(id).ifPresent(categorie -> {
+      categoryRepository.delete(categorie);
 
       History history = new History();
       history.setAction("Delete Categorie");
@@ -57,15 +61,16 @@ public class CategoryService {
     });
   }
 
-  public Depense addDepenseToCategorie(Long CategorieId, String depenseName) {
-    return CategoryRepository.findById(CategorieId)
-            .map(Categorie -> {
+  public Depense addDepenseToCategorie(Long categorieId, String depenseName) {
+    return categoryRepository.findById(categorieId)
+            .map(categorie -> {
               Depense depense = new Depense();
+              // Set additional fields if necessary, e.g. name
               depenseRepository.save(depense);
 
               History history = new History();
               history.setAction("Add Depense to Categorie");
-              history.setDetails("Added depense '" + depenseName + "' to Categorie with ID: " + CategorieId);
+              history.setDetails("Added depense '" + depenseName + "' to Categorie with ID: " + categorieId);
               history.setActionDate(LocalDate.now());
               historyRepository.save(history);
 
@@ -74,18 +79,17 @@ public class CategoryService {
             .orElse(null);
   }
 
-  public void removeDepenseFromCategorie(Long CategorieId, Long depenseId) {
-    Optional<Categorie> CategorieOpt = CategoryRepository.findById(CategorieId);
+  public void removeDepenseFromCategorie(Long categorieId, Long depenseId) {
+    Optional<Categorie> categorieOpt = categoryRepository.findById(categorieId);
     Optional<Depense> depenseOpt = depenseRepository.findById(depenseId);
 
-    if (CategorieOpt.isPresent() && depenseOpt.isPresent()) {
-      Categorie Categorie = CategorieOpt.get();
+    if (categorieOpt.isPresent() && depenseOpt.isPresent()) {
       Depense depense = depenseOpt.get();
       depenseRepository.delete(depense);
 
       History history = new History();
       history.setAction("Remove Depense from Categorie");
-      history.setDetails("Removed depense with ID: " + depenseId + " from Categorie with ID: " + CategorieId);
+      history.setDetails("Removed depense with ID: " + depenseId + " from Categorie with ID: " + categorieId);
       history.setActionDate(LocalDate.now());
       historyRepository.save(history);
     }

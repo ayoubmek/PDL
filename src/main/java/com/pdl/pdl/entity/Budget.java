@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "budget")
 public class Budget {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

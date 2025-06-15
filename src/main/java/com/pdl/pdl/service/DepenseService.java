@@ -10,7 +10,6 @@ import com.pdl.pdl.repository.HistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -34,7 +33,6 @@ public class DepenseService {
       throw new RuntimeException("Category or User cannot be null");
     }
 
-    // Set default status if not provided
     if (depense.getStatut() == null) {
       depense.setStatut(StatutDepense.SOUMIS);
     }
@@ -71,7 +69,6 @@ public class DepenseService {
 
     depenseRepository.deleteById(id);
   }
-
 
   public Depense updateDepense(Long id, Depense updatedDepense) {
     Depense existingDepense = depenseRepository.findById(id)
@@ -122,6 +119,4 @@ public class DepenseService {
 
     return savedDepense;
   }
-
-
 }

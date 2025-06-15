@@ -4,15 +4,12 @@ import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.util.Date;
-
 @Entity
 @Table(name = "rapport")
 public class Rapport {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(nullable = false)
     private String titre;
 
@@ -22,7 +19,6 @@ public class Rapport {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date_generation", nullable = false)
     private Date dateGeneration = new Date();
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "utilisateur_id", nullable = false)
     @JsonBackReference("rapport-utilisateur")

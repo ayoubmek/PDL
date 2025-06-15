@@ -30,7 +30,7 @@ public class AuthTestApplication {
 	                adminRole = new Role("ADMIN");
 	                adminRole = roleRepo.save(adminRole);
 	            }
-	         AppUser adminUser = userRepo.findByUsername("admin").orElse(null);
+				 AppUser adminUser = userRepo.findByUsername("admin").orElse(null);
 	         if (adminUser == null) {
 	                Set<Role> roles = new HashSet<>();
 	                roles.add(adminRole);

@@ -40,3 +40,29 @@ MoneyWise vous aide à suivre, organiser et analyser vos dépenses de manière *
 ```bash
 cd backend
 ./mvnw spring-boot:run
+
+
+## 🚀 Lancer le projet localement
+
+### ✅ Prérequis
+
+Assurez-vous d’avoir installé les éléments suivants :
+- [Java 17+](https://adoptium.net/)
+- [Node.js (v16 ou +)](https://nodejs.org/)
+- [Angular CLI](https://angular.io/cli)
+- [Maven](https://maven.apache.org/)
+
+### 📦 Installation de Node.js & Angular CLI (si non installé)
+
+```bash
+# Installer Node.js (Linux/Mac via nvm)
+nvm install 18
+nvm use 18
+
+# Vérifiez la version installée
+node -v
+npm -v
+
+# Installer Angular CLI
+npm install -g @angular/cli
+
